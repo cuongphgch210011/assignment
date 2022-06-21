@@ -22,9 +22,6 @@ class OrderDetail
     #[ORM\ManyToMany(targetEntity: Product::class)]
     private $product;
 
-    #[ORM\Column(type: 'float')]
-    private $price;
-
     #[ORM\Column(type: 'integer')]
     private $quantity;
 
@@ -70,18 +67,6 @@ class OrderDetail
     public function removeProduct(Product $product): self
     {
         $this->product->removeElement($product);
-
-        return $this;
-    }
-
-    public function getPrice(): ?float
-    {
-        return $this->price;
-    }
-
-    public function setPrice(float $price): self
-    {
-        $this->price = $price;
 
         return $this;
     }
