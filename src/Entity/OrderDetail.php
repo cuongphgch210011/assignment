@@ -19,7 +19,7 @@ class OrderDetail
     #[ORM\JoinColumn(nullable: false)]
     private $orderid;
 
-    #[ORM\ManyToMany(targetEntity: Product::class)]
+    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy:"orderid", cascade:['persist','remove'])]
     private $product;
 
     #[ORM\Column(type: 'integer')]
@@ -82,4 +82,5 @@ class OrderDetail
 
         return $this;
     }
+
 }
