@@ -15,15 +15,12 @@ class OrderDetail
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\OneToOne(targetEntity: Order::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private $orderid;
+    // #[ORM\OneToOne(targetEntity: Order::class, cascade: ['persist', 'remove'])]
+    // #[ORM\JoinColumn(nullable: false)]
+    // private $orderid;
 
-    #[ORM\ManyToMany(targetEntity: Product::class)]
+    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy:"orderid", cascade:['persist','remove'])]
     private $product;
-
-    #[ORM\Column(type: 'float')]
-    private $price;
 
     #[ORM\Column(type: 'integer')]
     private $quantity;
@@ -38,17 +35,17 @@ class OrderDetail
         return $this->id;
     }
 
-    public function getOrderid(): ?Order
-    {
-        return $this->orderid;
-    }
+    // public function getOrderid(): ?Order
+    // {
+    //     return $this->orderid;
+    // }
 
-    public function setOrderid(Order $orderid): self
-    {
-        $this->orderid = $orderid;
+    // public function setOrderid(Order $orderid): self
+    // {
+    //     $this->orderid = $orderid;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, Product>
@@ -74,18 +71,6 @@ class OrderDetail
         return $this;
     }
 
-    public function getPrice(): ?float
-    {
-        return $this->price;
-    }
-
-    public function setPrice(float $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
     public function getQuantity(): ?int
     {
         return $this->quantity;
@@ -97,4 +82,5 @@ class OrderDetail
 
         return $this;
     }
+
 }
