@@ -29,7 +29,7 @@ class Product
     private $price;
 
     #[ORM\ManyToOne(targetEntity: Category::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $category;
 
     public function getId(): ?int
