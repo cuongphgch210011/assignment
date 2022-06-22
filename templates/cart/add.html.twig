@@ -1,0 +1,13 @@
+{% form_theme cartForm "bootstrap_5_layout.html.twig" %}
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container col-md-7 text-center mt-3">
+<h1 class="text text-bg-success">Shopping cart</h1>
+{% for product in products %}
+    
+{% endfor %}
+{{ form_start (cartForm) }}
+{{ form_end (cartForm) }}
+</div>
+{% endblock %}

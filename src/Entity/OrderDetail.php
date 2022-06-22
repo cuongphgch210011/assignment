@@ -15,9 +15,9 @@ class OrderDetail
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\OneToOne(targetEntity: Order::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private $orderid;
+    // #[ORM\OneToOne(targetEntity: Order::class, cascade: ['persist', 'remove'])]
+    // #[ORM\JoinColumn(nullable: false)]
+    // private $orderid;
 
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy:"orderid", cascade:['persist','remove'])]
     private $product;
@@ -35,17 +35,17 @@ class OrderDetail
         return $this->id;
     }
 
-    public function getOrderid(): ?Order
-    {
-        return $this->orderid;
-    }
+    // public function getOrderid(): ?Order
+    // {
+    //     return $this->orderid;
+    // }
 
-    public function setOrderid(Order $orderid): self
-    {
-        $this->orderid = $orderid;
+    // public function setOrderid(Order $orderid): self
+    // {
+    //     $this->orderid = $orderid;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, Product>
