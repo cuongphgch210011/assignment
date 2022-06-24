@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Customer {% endblock %}
+
+{% block body %}
+<div class="container col-md-6 text-center mt-3">
+<h1 class="text text-primary"> Customer List </h1>
+{% for message in app.session.flashBag.get("Error") %}
+        <p class="alert alert-danger">{{ message }} </p>
+{% endfor %} 
+{% for message in app.session.flashBag.get("Success") %}
+        <p class="alert alert-warning">{{ message }} </p>
+{% endfor %} 
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Product Color</th>
+            <th>Product Price</th>
+            <th>Product Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+        <tr>
+            <td scope="row">{{ product.id }}</td>
+            <td>
+                <a href="{{ path('product_detail', {'id' : product.id })}}">
+                    {{ product.name }}
+                </a>
+             </td>
+            <td>{{ product.color }}</td>
+            <td>{{product.price}}
+            <td>
+            <img src="{{ asset('images/todo.jpg')}}" alt="todo"
+    width="500" height="400">
+    </td>
+            <td>
+                <a class="btn btn-warning" href="{{ path('product_edit', {'id' : product.id })}}">
+                    EDIT
+                </a>
+                <a class="btn btn-danger" href="{{ path('product_delete', {'id' : product.id })}}"
+                onclick="return confirm('Are you sure to delete this Product ?')";
+                >
+                    DELETE
+                </a>
+            </td>
+        </tr>
+    {% endfor %}    
+    </tbody>
+</table>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% form_theme formProduct 'bootstrap_5_layout.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}} page{% endblock %}
+
+{% block dropdown %}
+    <div class="navbar-nav">
+        <select onchange="window.location.href=this.value" id= "MyProduct_Btn" class ="btn btn-primary">
+            <option class= "option">My Product</option>
+            {% for c in Product %}
+                    <option value="{{path('product_detail' ,{'id': c.id }) }}">{{c.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_ADMIN') %}
+<div class = "container-fluid row">
+    <div class = "col-lg-2">
+        <ul class = "navbar-nav">
+            <a href="{{path('category_index')}}">Category</a>
+            <a href="{{path('product_index')}}">Product</a>
+            <a href="{{path('app_register')}}">Create Account</a>
+        </ul>
+    </div>
+    <div class = "col-lg-10">
+        <h1 class = "text text-primary">{{title}} Product</h1>
+        {{form(formProduct)}}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
