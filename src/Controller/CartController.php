@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\OrderDetail;
+use App\Entity\Product;
 use App\Form\CartType;
+use App\Repository\CustomerRepository;
 use App\Repository\OrderDetailRepository;
+use App\Repository\ProductRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,32 +18,35 @@ use Symfony\Component\Routing\Annotation\Route;
 class CartController extends AbstractController
 {
     #[Route('/', name: 'cart')]
-    public function CartIndex(OrderDetailRepository $cartRepository)
+    public function CartIndex()
     {
-        $carts = $cartRepository->findAll();
-        return $this->render(
-            "cart/index.html.twig",
-        [
-            'carts' => $carts
-        ]
-        );
+        $cart = $this->cart->getItems();
+
+        return $this->render('cart/index.html.twig', ['cart' => $cart]);
     }
 
+    #[Route('/clear', name: 'clear_cart')]
+    public function ClearCart()
+    {
+        $this->cart->clear();
+
+        $this->addFlash('success', 'Cart cleared');
+
+        return $this->redirectToRoute('homepage');
+    }
     #[Route('/add', name: 'add_cart')]
-    public function CartAdd(Request $request, ManagerRegistry $managerRegistry){
-        $cart = new OrderDetail;
-        $form = $this->createForm(CartType::class,$cart);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $manager = $managerRegistry->getManager();
-            $manager->persist($cart);
-            $manager->flush();
-            $this->addFlash("Success","Added to cart !");
-            return $this->redirectToRoute("cart");
-        }
-        return $this->render("cart/add.html.twig",
-        [
-            'cartForm' => $form->createView()
+    public function addToCartAction(Product $product)
+    {
+        $item = new OrderDetail([
+            'id' => $product->getId(),
+            'name' => $product->getName(),
+            'price' => $product->getPrice(),
         ]);
+        $item->setQuantity(1); // defaults to 1
+        $this->cart->addItem($item);
+
+        $this->addFlash('success', 'Product added to cart successfully.');
+
+        return $this->redirectToRoute('home');
     }
 }
