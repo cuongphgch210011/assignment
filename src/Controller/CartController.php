@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CartController extends AbstractController
 {
     #[Route('/', name: 'cart')]
-    public function CartIndex()
+    public function CartIndex(Request $request)
     {
         $cart = $this->cart->getItems();
 

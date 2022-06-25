@@ -5,9 +5,10 @@ namespace App\Controller;
 
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use Proxies\__CG__\App\Entity\Category;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Proxies\__CG__\App\Entity\Category;
 
 class HomeController extends AbstractController
 {
@@ -21,10 +22,11 @@ class HomeController extends AbstractController
     }
     
     #[Route('/category/{id}', name: 'categorysort')]
-    public function Categoryindex(ProductRepository $productRepository, CategoryRepository $categoryRepossitory, $id) 
-    {
+    public function Categoryindex(Request $request,ProductRepository $productRepository, CategoryRepository $categoryRepossitory,$id) 
+    {     $category = $productRepository->showByCategory($id);
         return $this->render('home/index.html.twig', [
-            'products' => $productRepository->find($id),
+          
+            'products' => $category,
             'categorys'=>$categoryRepossitory->findAll(),
         ]);
     }

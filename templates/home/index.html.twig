@@ -4,23 +4,26 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container" >
   <div class="row">
-    <div class="col-sm-2">
-    {% for product in products %}
-    
-   
+    <div class="col-sm-2" id="category">
+    {% for category in categorys %}
        <ul>
-       <li><a href="{{ path('categorysort', {id: product.category.id}) }}">{{product.category.name}}</a></li>
+       <li><a href="{{ path('categorysort', {id:category.id}) }}">{{category.name}}</a></li>
        </ul> 
     
      {% endfor %}
     </div>
     <div class="col-lg">
      <div class="container "  >
+      <form class="form-group" action="#" method="post">
+        <input class="form-control" type="search" name="keyword" required
+        placeholder="Search by course name">
+    </form>
     <div class="row">
+    <br>
          {% for product in products %}
-            <div class="col-md-4">
+            <div class="col-md-4 mt-2">
                 <div class="card mb-4">
                     <img src="https://via.placeholder.com/200x150" alt="{{ product.name }}" class="card-img-top">
                     <div class="card-body">
