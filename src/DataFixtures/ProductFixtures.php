@@ -12,11 +12,12 @@ class ProductFixtures extends Fixture
     {
         for ($i=1; $i<=10; $i++) {
             $product = new Product;
-            $product->setName("Course $i");
-            $product->setDescription("Product $i");
+            $product->setName("Product $i");
+            $product->setDescription("the best shoe ever");
             $product->setImage("https://png.pngtree.com/png-clipart/20201209/original/pngtree-casual-shoes-png-image_5640199.jpg");
             $product->setColor("red");
             $product->setPrice("10000");
+            $product->getCategory(1);
             $manager->persist($product);
         }
 

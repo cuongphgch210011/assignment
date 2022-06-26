@@ -14,11 +14,11 @@
                 <hr>
                 <b>Description: </b>{{ product.description }}
                 <form class="mt-4 p-4 bg-light" method="post">
-                    <div class="form-group">
+                    {# <div class="form-group">
                         <label for="quantity">Quantity</label>
                         <input type="number" class="form-control" id="quantity">
-                    </div>
-                    <button class="btn btn-warning">Add to Cart</button>
+                    </div> #}
+                    <a href="{{ path('cart_add', {id: product.id}) }}" class="btn btn-dark">Add to Cart</a>
                 </form>
             </div>
         </div>

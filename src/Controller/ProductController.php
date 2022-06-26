@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-
 use App\Form\ProductType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,8 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route("/product")]
 class ProductController extends AbstractController
 {
-   
-
 
    #[Route("/", name: "product_index")]  
    public function productIndex(ManagerRegistry $managerRegistry) {
@@ -103,6 +100,5 @@ class ProductController extends AbstractController
          'productForm' => $form,
          'title' => $title
       ]);
-   
-}
+   }
 }
