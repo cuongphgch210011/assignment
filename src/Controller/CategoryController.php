@@ -60,13 +60,13 @@ class CategoryController extends AbstractController
    }
 
    #[Route("/add", name: "category_add")]
-   public function addcategory(Request $request) {
+   public function addcategory(Request $request,ManagerRegistry $managerRegistry) {
       $category = new Category;
       $form = $this->createForm(CategoryType::class, $category);
       $form->handleRequest($request);
       $title = "Add new category";
       if ($form->isSubmitted() && $form->isValid()) {
-         $manager = $this->getDoctrine()->getManager();
+         $manager = $managerRegistry->getManager();
          $manager->persist($category);
          $manager->flush();
          $this->addFlash("Success","Add category succeed !");

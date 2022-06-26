@@ -1,6 +1,7 @@
 body{
 margin: 0;
 padding: 0;
+background-color: #f4f4f4;
 }
 #category ul{
   list-style-type: none;
@@ -8,28 +9,48 @@ padding: 0;
   padding: 0;
 }
 #category{
- background-color: rgb(240 240 240);
+ background-color: rgb(255, 255, 255);
   border-radius: 8px;
   padding:0;
-  height:600px
+  height:auto;
+  box-shadow: rgb(60 64 67 / 10%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+  border-radius: 10px;
+  
 }
 #category ul{
-  list-style-type: none;
+  padding: 0;
   margin: 0;
-  padding: 5px;
-  text-align: left;
-  font-size: 20px;
-  display:block;
-     
+  list-style: none;
+  line-height: 20px;
+  background-color: white;
+  border-radius: 10px;
   
   
   
 }
+#category ul li{
+  margin: 0;
+  padding: 0;
+  display: block;
+  border: none;
+}
 #category ul li a{
- text-decoration: none;
-  color:black
+  text-align: left;
+  text-decoration: none;
+  display: block;
+  color: rgb(0, 0, 0);
+  padding: 8px;
  
+}
+#category ul li a:hover{
+    
+  background: #eaeaea;
 }
 #category ul:hover {
 background-color: white;
+}
+#cart{
+  position: absolute;
+  left:1350px;
+  top: 12px;
 }
