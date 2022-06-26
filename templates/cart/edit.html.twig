@@ -1,0 +1,33 @@
+{% form_theme formOrderDetail 'bootstrap_5_layout.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}} Shopping cart {% endblock %}
+
+{# {% block dropdown %}
+    <div class="navbar-nav">
+        <select onchange="window.location.href=this.value" id= "MyCategory_Btn" class ="btn btn-primary">
+            <option class= "option">My Category</option>
+            {% for c in category %}
+                    <option value="{{path('category_detail' ,{'id': c.id }) }}">{{c.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endblock %} #}
+
+{% block body %}
+{% if is_granted('ROLE_USER') %}
+<div class = "container-fluid row">
+    {# <div class = "col-lg-2">
+        <ul class = "navbar-nav">
+            <a href="{{path('category_index')}}">Category</a>
+            <a href="{{path('product_index')}}">Product</a>
+            <a href="{{path('app_register')}}">Create Account</a>
+        </ul>
+    </div> #}
+    <div class = "col-lg-10">
+        <h1 class = "text text-primary">{{title}} Shopping cart </h1>
+        {{form(formOrderDetail)}}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -20,9 +20,12 @@ class OrderDetailType extends AbstractType
             'product',
             EntityType::class,
             [
-                'choice_label' => 'Product id',
+                'label' => 'Product name',
                 'required' => true,
-                'class' => Product::class,   
+                'class' => Product::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => false
             ]
         )
         ->add(

@@ -14,7 +14,7 @@ class ProductFixtures extends Fixture
             $product = new Product;
             $product->setName("Product $i");
             $product->setDescription("the best shoe ever");
-            $product->setImage("https://png.pngtree.com/png-clipart/20201209/original/pngtree-casual-shoes-png-image_5640199.jpg");
+            $product->setImage('image/img'.$i.'.jpg');
             $product->setColor("red");
             $product->setPrice("10000");
             $product->getCategory(1);
