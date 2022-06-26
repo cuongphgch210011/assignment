@@ -1,53 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Sneaker Boy {% endblock %}
+{% block title %}
+	Sneaker Boy
+{% endblock %}
 
 {% block body %}
 
-<div class="container col-lg-16 text-center" >
-  <div class="row">
-    <div class="col-sm-2" id="category">
-    {% for category in categorys %}
-       <ul>
-       <li><a href="{{ path('categorysort', {id:category.id}) }}">{{category.name}}</a></li>
-       </ul> 
-    
-     {% endfor %}
-    </div>
-    <div class="col-lg">
-     <div class="container "  >
-      <form class="form-group" action="{{path('searchByName')}}" method="post">
-        <input class="form-control" type="search" name="keyword" required
-        placeholder="Search">
-    </form>
-    <div class="row">
-    <br>
-         {% for product in products %}
-            <div class="col-md-4 mt-2">
-                <div class="card mb-4">
-                    <img src="{{product.image}}" alt="{{ product.name }}" class="card-img-top" width="200" height="150">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.description }}</p>
-                        <div class="d-flex justify-content-between align-item-center">
-                            <a href="{{ path('product_detail', {id: product.id}) }}" class="btn btn-dark">View details</a>
-                            <span class="h5 mt-auto">{{ product.price }} €</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</div>
-    </div>
-    <div class="col-sm-2">
-   {% for product in products %}
-       <ul>
-       <li><a href="{{ path('product_detail', {id:product.id}) }}"><img src="{{product.image}}" alt="{{ product.name }}"  width="250" height="200" ></a></li>
-       </ul> 
-     {% endfor %}
-    </div>
-  </div>
-</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-2" id="category">
+				{% for category in categorys %}
+					<ul>
+						<li><ahref="{{ path('categorysort', {id:category.id}) }}">{{category.name}}</a></li>
+					</ul>
+
+				{% endfor %}
+			</div>
+			<div class="col-lg">
+				<div class="container ">
+					<form class="form-group" action="#" method="post">
+						<input class="form-control" type="search" name="keyword" required placeholder="Search by course name">
+					</form>
+					<div class="row">
+						<br>
+						{% for product in products %}
+							<div class="col-md-4 mt-2">
+								<div class="card mb-4">
+									<img src="{{asset(product.image)}}" alt="{{ product.name }}" class="card-img-top">
+									<div class="card-body">
+										<h5 class="card-title">{{ product.name }}</h5>
+										<p class="card-text">{{ product.description }}</p>
+										<div class="d-flex justify-content-between align-item-center">
+											<a href="{{ path('product_detail', {id: product.id}) }}" class="btn btn-dark">View details</a>
+											<span class="h5 mt-auto">{{ product.price }}
+												€</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2"></div>
+		</div>
+	</div>
 
 {% endblock %}
+

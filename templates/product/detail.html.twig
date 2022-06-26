@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row mt-3 mb-4">
             <div class="col-md-4">
-                <img src="https://via.placeholder.com/600x400" alt="{{ product.name }}" class="img-fluid">
+                <img src="{{asset(product.image)}}" alt="{{ product.name }}" class="img-fluid">
             </div>
             <div class="col-md-8">
                 <h1 class="mt-4 mt-md-0">{{ product.name }}</h1>
@@ -14,11 +14,11 @@
                 <hr>
                 <b>Description: </b>{{ product.description }}
                 <form class="mt-4 p-4 bg-light" method="post">
-                    <div class="form-group">
+                    {# <div class="form-group">
                         <label for="quantity">Quantity</label>
                         <input type="number" class="form-control" id="quantity">
-                    </div>
-                    <button class="btn btn-warning">Add to Cart</button>
+                    </div> #}
+                    <a href="{{ path('cart_add', {id: product.id}) }}" class="btn btn-dark">Add to Cart</a>
                 </form>
             </div>
         </div>
