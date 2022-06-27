@@ -24,8 +24,6 @@ class OrderDetailType extends AbstractType
                 'required' => true,
                 'class' => Product::class,
                 'choice_label' => 'name',
-                'multiple' => false,
-                'expanded' => false
             ]
         )
         ->add(

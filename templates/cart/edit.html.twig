@@ -1,7 +1,7 @@
-{% form_theme formOrderDetail 'bootstrap_5_layout.html.twig' %}
+{% form_theme orderdetailForm 'bootstrap_5_layout.html.twig' %}
 {% extends 'base.html.twig' %}
 
-{% block title %}{{title}} Shopping cart {% endblock %}
+{% block title %} Shopping cart {% endblock %}
 
 {# {% block dropdown %}
     <div class="navbar-nav">
@@ -15,7 +15,6 @@
 {% endblock %} #}
 
 {% block body %}
-{% if is_granted('ROLE_USER') %}
 <div class = "container-fluid row">
     {# <div class = "col-lg-2">
         <ul class = "navbar-nav">
@@ -25,9 +24,8 @@
         </ul>
     </div> #}
     <div class = "col-lg-10">
-        <h1 class = "text text-primary">{{title}} Shopping cart </h1>
-        {{form(formOrderDetail)}}
+        <h1 class = "text text-primary"> Shopping cart </h1>
+        {{form(orderdetailForm)}}
     </div>
 </div>
-{% endif %}
 {% endblock %}
