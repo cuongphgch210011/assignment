@@ -1,0 +1,10 @@
+{% form_theme categoryForm "bootstrap_5_layout.html.twig" %}
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div category="container col-md-7 text-center mt-3">
+<h1 category="text text-bg-success">Edit category</h1>
+{{ form_start (categoryForm) }}
+{{ form_end (categoryForm) }}
+</div>
+{% endblock %}

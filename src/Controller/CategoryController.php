@@ -10,7 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 #[Route("/category")]
 class CategoryController extends AbstractController
 {
@@ -60,13 +63,13 @@ class CategoryController extends AbstractController
    }
 
    #[Route("/add", name: "category_add")]
-   public function addcategory(Request $request) {
+   public function addcategory(Request $request, ManagerRegistry $managerReigistry) {
       $category = new Category;
       $form = $this->createForm(CategoryType::class, $category);
       $form->handleRequest($request);
       $title = "Add new category";
       if ($form->isSubmitted() && $form->isValid()) {
-         $manager = $this->getDoctrine()->getManager();
+         $manager = $managerReigistry->getManager();
          $manager->persist($category);
          $manager->flush();
          $this->addFlash("Success","Add category succeed !");
@@ -80,7 +83,7 @@ class CategoryController extends AbstractController
    }
 
    #[Route("/edit/{id}", name: "category_edit")]
-   public function editcategory(Request $request, $id, ManagerRegistry $managerRegistry) {
+   public function editcategory(Request $request, ManagerRegistry $managerRegistry, $id) {
       $category = $managerRegistry->getRepository(Category::class)->find($id);
       $form = $this->createForm(CategoryType::class, $category);
       $form->handleRequest($request);

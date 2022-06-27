@@ -1,83 +1,77 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>
-			{% block title %}
-				Academic Portal
-			{% endblock %}
-		</title>
-		{# Run `composer require symfony/webpack-encore-bundle`
-		           and uncomment the following Encore helpers to start using Symfony UX #}
-		{% block stylesheets %}
-			<link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css')}}">
-			<link rel="stylesheet" href="{{ asset('css/style.css')}}">
-		{% endblock %}
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %} Academic Portal {% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css')}}">
+            <link rel="stylesheet" href="{{ asset('css/style.css')}}">
+        {% endblock %}
 
-		{% block javascripts %}
-			{#{{ encore_entry_script_tags('app') }}#}
-		{% endblock %}
-	</head>
-	<body>
-		{% block navigation %}
-
-			<nav class="navbar navbar-expand navbar-light bg-light float-right">
-				<a class="nav-link" href="{{ path('home') }}"><img src="{{asset('image/logo.png')}}" width="150" height="auto"></a>
-
-				<ul class="nav navbar-nav  ">
-					{% if is_granted('ROLE_ADMIN') %}
-						<li class="nav-item active">
-							<h2>
-								<a class="nav-link" href="#">Customer</a>
-							</h2>
-						</li>
-						<li class="nav-item">
-							<h2>
-								<a class="nav-link" href="#">Product</a>
-							</h2>
-						</li>
-						<li class="nav-item">
-							<h2>
-								<a class="nav-link" href="{{ path('cart_index') }}">Shopping Cart</a>
-							</h2>
-						</li>
-					{% endif %}
-					<li class="nav-item ">
-						{% if app.user  %}
-							<h2>
-								<a class="nav-link" href="{{ path('app_logout') }}">Logout
-									<i>({{ app.user.username }})</i>
-								</a>
-							</h2>
-						{% else %}
-							<h2>
-								<a class="nav-link" href="{{ path('app_login') }}">Login
-
-								</a>
-							</h2>
-						{% endif %}
-					</li>
-				</ul>
-			</nav>
-		{% endblock %}
-		{% block message %}
-			<div class="container col-lg-12 text-center mb-3 mt-4">
-				{% for error in app.session.flashBag.get('Error') %}
-					<p class="alert alert-danger">{{ error }}
-					</p>
-				{% endfor %}
-				{% for success in app.session.flashBag.get('Success') %}
-					<p class="alert alert-success">{{ success }}
-					</p>
-				</div>
-			{% endfor %}
-		{% endblock %}
-		{% block body %}{% endblock %}
-		{% block footer %}
-			<div class="container fluid col-md-10 text-center mt-5">
-				<p class="text text-bg-light">Demo web project - 2022
-				</p>
-			</div>
-		{% endblock %}
-	</body>
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+        {% block navigation %}
+          
+            <nav class="navbar navbar-expand navbar-light bg-primary " id="navbar1">
+            
+ <a class="nav-link" href="{{ path('home') }}" ><img  src="{{asset('image/logo.png')}}" width="150" height="auto"></a>
+                   <ul class="nav navbar-nav  " >
+                   {% if is_granted('ROLE_ADMIN') %}
+                  
+                    <li class="nav-item">
+                        <h2><a class="nav-link" href="{{path('product_index')}}">Product</a></h2>
+                    </li>
+                    <li class="nav-item">
+                        <h2><a class="nav-link" href="{{path('category_index')}}">Category</a></h2>
+                    </li>
+                
+                     {% endif %}
+                      {% if app.user  %}
+                    <li class="nav-item ">
+                   
+                        <h2><a class="nav-link" href="{{ path('app_logout') }}">Logout 
+                        <i>({{ app.user.username }})</i>
+                        </a></h2>
+                        </li>
+                          <li class="nav-item ">
+                        <h2><a class="nav-link" href="{{ path('user_edit', {id: app.user.id} ) }}">Profile 
+                       
+                        </a></h2>
+                        </li>
+                        {% else %}
+                          <li class="nav-item ">
+                            <h2><a class="nav-link" href="{{ path('app_login') }}">Login 
+                       
+                        </a></h2>
+                        </li>
+                        {% endif %}
+                    </li>
+                </ul>
+                <a class="nav-link" href="{{ path('home') }}" ><img  src="{{asset('image/cart.png')}}" width="80" height="auto" id="cart"></a>
+            </nav>
+          
+        {% endblock %}
+        {% block message %}
+        <div class="container col-lg-12 text-center mb-3 mt-4" >
+            {% for error in app.session.flashBag.get('Error') %}
+                <p class="alert alert-danger col-md-3 text-center">{{ error }} </p>
+            {% endfor %}
+            {% for success in app.session.flashBag.get('Success') %}
+                <p class="alert alert-success  col-md-3 text-center" >{{ success }} </p>
+        </div>
+        {% endfor %}
+        {% endblock %}
+        {% block body %}{% endblock %}
+        {% block footer %}
+        <div class="container fluid col-md-10 text-center mt-5">
+            <p class="text text-bg-light">Demo web project - 2022 </p>
+        </div>
+        {% endblock %}
+        <br>
+    </body>
 </html>

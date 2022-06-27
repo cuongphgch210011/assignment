@@ -2,14 +2,16 @@
 
 {% block title %} Product {% endblock %}
 
+
 {% block body %}
-<div class="container col-md-6 text-center mt-3">
+<div class="container col-md-9 text-center mt-3">
 <h1 class="text text-primary"> Product List </h1>
+<a name="" id="" class="btn btn-primary" href="{{ path('product_add')}}" role="button">Add</a>
 {% for message in app.session.flashBag.get("Error") %}
-        <p class="alert alert-danger">{{ message }} </p>
+        <p class="alert alert-danger  col-md-3 ">{{ message }} </p>
 {% endfor %} 
 {% for message in app.session.flashBag.get("Success") %}
-        <p class="alert alert-warning">{{ message }} </p>
+        <p class="alert alert-warning  col-md-3 ">{{ message }} </p>
 {% endfor %} 
 <table class="table">
     <thead>
@@ -19,6 +21,7 @@
             <th>Product Color</th>
             <th>Product Price</th>
             <th>Product Image</th>
+            <th> Category</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -32,11 +35,12 @@
                 </a>
              </td>
             <td>{{ product.color }}</td>
-            <td>{{product.price}}
+            <td>{{product.price}}</td>
             <td>
-            <img src="{{ asset('images/todo.jpg')}}" alt="todo"
-    width="500" height="400">
+            <img src="{{asset(product.image)}}" alt="{{product.name}}"
+    width="200" height="200">
     </td>
+     <td>{{product.category.name}}</td>
             <td>
                 <a class="btn btn-warning" href="{{ path('product_edit', {'id' : product.id })}}">
                     EDIT

@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block navigation %}{% endblock %}
+{% block navigation %}
+<nav class="navbar navbar-expand navbar-light bg-primary " id="navbar1">
+            
+ <a class="nav-link" href="{{ path('home') }}" ><img  src="{{asset('image/logo.png')}}" width="150" height="auto"></a>
+ </nav>
+{% endblock %}
 
 {% block body %}
 <div class="container col-md-5 text-center mt-3">
@@ -44,4 +49,4 @@
 
 {% endblock %}
 
-{% block footer %}{% endblock %}
+

@@ -1,9 +1,9 @@
-{% form_theme categoForm 'bootstrap_5_layout.html.twig' %}
+{% form_theme userForm 'bootstrap_5_layout.html.twig' %}
 {% extends "base.html.twig" %}
 {% block title %} {{ title }} {% endblock %}
 {% block body %}
 <div class="container-fluid col-md-5 text-center">
    <h1 class="text text-bg-success mt-3 mb-3">{{ title }} </h1>
-   {{ form (categoryForm) }}
+   {{ form (userForm) }}
 </div>
 {% endblock %}

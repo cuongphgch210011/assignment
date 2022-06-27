@@ -14,38 +14,33 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Product Id</th>
-            <th>Product Name</th>
-            <th>Product Color</th>
-            <th>Product Price</th>
-            <th>Product Image</th>
+            <th>Customer Id</th>
+            <th>Customer Name</th>
+            <th>Customer Phone</th>
+            <th>Customer City</th>
+            <th>Customer Password</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-    {% for product in products %}
+    {% for user in users %}
         <tr>
-            <td scope="row">{{ product.id }}</td>
+            <td scope="row">{{ app.user.id }}</td>
             <td>
-                <a href="{{ path('product_detail', {'id' : product.id })}}">
-                    {{ product.name }}
-                </a>
+                
+                    {{ app.user.customer.name }}
+                
              </td>
-            <td>{{ product.color }}</td>
-            <td>{{product.price}}
+            <td>{{ app.user.customer.phone }}</td>
+            <td>{{app.user.customer.city}}
             <td>
-            <img src="{{ asset('images/todo.jpg')}}" alt="todo"
-    width="500" height="400">
+            {{app.user.customer.password}}
     </td>
             <td>
-                <a class="btn btn-warning" href="{{ path('product_edit', {'id' : product.id })}}">
+                <a class="btn btn-warning" href="{{ path('Customer_edit', {'id' : Customer.id })}}">
                     EDIT
                 </a>
-                <a class="btn btn-danger" href="{{ path('product_delete', {'id' : product.id })}}"
-                onclick="return confirm('Are you sure to delete this Product ?')";
-                >
-                    DELETE
-                </a>
+               
             </td>
         </tr>
     {% endfor %}    

@@ -30,4 +30,16 @@ class HomeController extends AbstractController
             'categorys'=> $categoryRepossitory->findAll(),
         ]);
     }
+
+    #[Route('/searchbyname', name: 'searchByName')]
+    public function SearchByName (ProductRepository $productRepository,CategoryRepository $categoryRepossitory, Request $request) {
+        $name = $request->get('keyword');
+        $products = $productRepository->searchByName($name);
+        return $this->render(
+            "home/index.html.twig",
+            [
+                'products' => $products,
+                'categorys'=>$categoryRepossitory->findAll(),
+            ]);
+    }
 }

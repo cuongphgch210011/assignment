@@ -1,17 +1,32 @@
+{% form_theme registrationForm 'bootstrap_5_layout.html.twig' %}
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block navigation %}
+<nav class="navbar navbar-expand navbar-light bg-primary " id="navbar1">
+            
+ <a class="nav-link" href="{{ path('home') }}" ><img  src="{{asset('image/logo.png')}}" width="150" height="auto"></a>
+ </nav>
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class="container col-md-5 text-center mt-3">
+<form class="card p-3 bg-info" method="post">
+    <h1 class="text text-danger">Register</h1>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
+        {{ form_row(registrationForm.username) }} 
+        <br>
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
+        <br>
         {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
+ <div class="col-md-3 ">
+        <button class="btn btn-lg btn-primary text-center" type="submit" class="btn">Register</button>
+      </div>
     {{ form_end(registrationForm) }}
+    </form>
+    </div>
 {% endblock %}
+
+{% block footer %}{% endblock %}
