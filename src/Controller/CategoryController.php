@@ -65,7 +65,7 @@ class CategoryController extends AbstractController
       $form->handleRequest($request);
       $title = "Add new category";
       if ($form->isSubmitted() && $form->isValid()) {
-         $manager = $managerRegistry->getManager();
+         $manager = $managerReigistry->getManager();
          $manager->persist($category);
          $manager->flush();
          $this->addFlash("Success","Add category succeed !");
