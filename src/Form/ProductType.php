@@ -39,6 +39,10 @@ class ProductType extends AbstractType
             [
                 'label' => 'Product Color'
             ])
+            ->add('description', TextType::class,
+            [
+                'label' => 'Product Description'
+            ])
             ->add('image', FileType::class,
             [
                 'label' => 'Product image',

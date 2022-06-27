@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use function PHPUnit\Framework\throwException;
+
 /**
  * @IsGranted("ROLE_ADMIN")
  */
@@ -69,6 +72,26 @@ class ProductController extends AbstractController
       $form->handleRequest($request);
       $title = "Add new product";
       if ($form->isSubmitted() && $form->isValid()) {
+         $image = $product->getImage();
+            //B2: tạo tên mới cho ảnh => đảm bảo tên ảnh là duy nhất
+            $imgName = uniqid(); //unique id
+            //B3: lấy đuôi (extension) của file ảnh
+            //Note: cần xóa data type "string" trong getter & setter của file Entity
+            $imgExtension = $image->guessExtension();
+            //B4: tạo tên file hoàn thiện cho ảnh (tên mới + đuôi cũ)
+            $imageName = "image/" . $imgName . "." . $imgExtension;
+            //B5: di chuyển file ảnh đến thư mục chỉ định ở trong project  
+            //Note1: cần tạo thư mục chứa ảnh trong public
+            //Note2: cấu hình parameter trong file services.yaml (thư mục config)
+             try {
+                $image->move (
+                    $this->getParameter('product_image'),$imageName
+                );
+            } catch (FileException $e) {
+                throwException($e);
+            }
+            //B6: lưu tên ảnh vào trong DB
+            $product->setImage($imageName);
          $manager = $managerReigistry->getManager();
          $manager->persist($product);
          $manager->flush();
@@ -89,6 +112,31 @@ class ProductController extends AbstractController
       $form->handleRequest($request);
       $title = "Edit product";
       if ($form->isSubmitted() && $form->isValid()) {
+         $imageFile = $form['image']->getData();
+                if ($imageFile != null) {
+                    //B1: tạo 1 biến để lấy dữ liệu ảnh được upload từ form
+                    $image = $product->getImage();
+                    //B2: tạo tên mới cho ảnh => đảm bảo tên ảnh là duy nhất
+                    $imgName = uniqid(); //unique id
+                    //B3: lấy đuôi (extension) của file ảnh
+                    //Note: cần xóa data type "string" trong getter & setter của file Entity
+                    $imgExtension = $image->guessExtension();
+                    //B4: tạo tên file hoàn thiện cho ảnh (tên mới + đuôi cũ)
+                    $imageName ="image/" . $imgName . "." . $imgExtension;
+                    //B5: di chuyển file ảnh đến thư mục chỉ định ở trong project
+                    //Note1: cần tạo thư mục chứa ảnh trong public
+                    //Note2: cấu hình parameter trong file services.yaml (thư mục config)
+                    try {
+                        $image->move(
+                            $this->getParameter('product_image'),
+                            $imageName
+                        );
+                    } catch (FileException $e) {
+                        throwException($e);
+                    }
+                    //B6: lưu tên ảnh vào trong DB
+                    $product->setImage($imageName);
+                }
          $manager = $managerRegistry->getManager();
          $manager->persist($product);
          $manager->flush();
