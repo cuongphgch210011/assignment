@@ -3,23 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-
 use App\Form\ProductType;
+use App\Repository\ProductRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-/**
- * @IsGranted("ROLE_ADMIN")
- */
+
 #[Route("/product")]
 class ProductController extends AbstractController
 {
-   
-
-
    #[Route("/", name: "product_index")]  
    public function productIndex(ManagerRegistry $managerRegistry) {
        $products = $managerRegistry->getRepository(Product::class)->findAll();
@@ -66,13 +60,13 @@ class ProductController extends AbstractController
    }
 
    #[Route("/add", name: "product_add")]
-   public function addproduct(Request $request,ManagerRegistry $managerRegistry) {
+   public function addproduct(Request $request, ManagerRegistry $managerReigistry) {
       $product = new Product;
       $form = $this->createForm(ProductType::class, $product);
       $form->handleRequest($request);
       $title = "Add new product";
       if ($form->isSubmitted() && $form->isValid()) {
-         $manager = $managerRegistry->getManager();
+         $manager = $managerReigistry->getManager();
          $manager->persist($product);
          $manager->flush();
          $this->addFlash("Success","Add product succeed !");
@@ -86,7 +80,7 @@ class ProductController extends AbstractController
    }
 
    #[Route("/edit/{id}", name: "product_edit")]
-   public function editproduct(Request $request, $id , ManagerRegistry $managerRegistry) {
+   public function editproduct(Request $request, ManagerRegistry $managerRegistry, $id) {
       $product = $managerRegistry->getRepository(Product::class)->find($id);
       $form = $this->createForm(ProductType::class, $product);
       $form->handleRequest($request);
@@ -103,6 +97,5 @@ class ProductController extends AbstractController
          'productForm' => $form,
          'title' => $title
       ]);
-   
-}
+   }
 }
