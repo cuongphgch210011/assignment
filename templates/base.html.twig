@@ -22,9 +22,7 @@
  <a class="nav-link" href="{{ path('home') }}" ><img  src="{{asset('image/logo.png')}}" width="150" height="auto"></a>
                    <ul class="nav navbar-nav  " >
                    {% if is_granted('ROLE_ADMIN') %}
-                   <li class="nav-item active">
-                        <h2><a class="nav-link" href="#">Customer</a></h2>
-                    </li>
+                  
                     <li class="nav-item">
                         <h2><a class="nav-link" href="{{path('product_index')}}">Product</a></h2>
                     </li>
@@ -33,15 +31,24 @@
                     </li>
                 
                      {% endif %}
-                    <li class="nav-item text-white">
-                    {% if app.user  %}
+                      {% if app.user  %}
+                    <li class="nav-item ">
+                   
                         <h2><a class="nav-link" href="{{ path('app_logout') }}">Logout 
                         <i>({{ app.user.username }})</i>
                         </a></h2>
+                        </li>
+                          <li class="nav-item ">
+                        <h2><a class="nav-link" href="{{ path('user_edit', {id: app.user.id} ) }}">Profile 
+                       
+                        </a></h2>
+                        </li>
                         {% else %}
+                          <li class="nav-item ">
                             <h2><a class="nav-link" href="{{ path('app_login') }}">Login 
                        
                         </a></h2>
+                        </li>
                         {% endif %}
                     </li>
                 </ul>

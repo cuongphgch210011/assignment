@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepository;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OrderRepository;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -20,9 +21,9 @@ class Order
     #[ORM\Column(type: 'string', length: 255)]
     private $shipcity;
 
-    #[ORM\ManyToOne(targetEntity: Customer::class)]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $customer;
+    private $user;
 
     #[ORM\OneToOne(inversedBy: 'orderid', targetEntity: OrderDetail::class, cascade: ['persist', 'remove'])]
     private $orderdetail;
