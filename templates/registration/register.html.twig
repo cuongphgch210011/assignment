@@ -1,17 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block navigation %}{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+      <div class="container col-md-5 text-center mt-3" >
+                                           
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    <form name="registration_form" class="card p-3 bg-info" method="post">
+     <h1 class="text text-danger">Register</h1>
+        <div><label for="registration_form_username" class="required">Username</label>
+        <input type="text" id="registration_form_username" name="registration_form[username]" required="required" maxlength="180" class="form-control" autofocus/></div>
+        <div><label for="registration_form_plainPassword" class="required">Password</label>
+        <input type="password" id="registration_form_plainPassword" name="registration_form[plainPassword]" required="required" autocomplete="new-password" class="form-control"/></div>
+        <div class="checkbox mb-3">
+    <label for="registration_form_agreeTerms" class="required">Agree terms</label>
+    <input type="checkbox" id="registration_form_agreeTerms" name="registration_form[agreeTerms]" required="required" value="1" />
+    </div>
+  <div class="col-md-3 ">
+        <button type="submit" class="btn btn-lg btn-primary text-center">Register</button>
+         </div>
+   
+    <input type="hidden" id="registration_form__token" name="registration_form[_token]" value="78687b588937f533da2d19bd.Ny2JWMy5JAZiTA8lRKOS0E1gHX238jDWs5qBk_BpSa0.X3jOFrX_dWwwByJhKJvjuCJQTjfAynf76svw1ZImJu4aXcIcm-oRYwF0Tg" />
+    </form>
+    </div>
 {% endblock %}
+

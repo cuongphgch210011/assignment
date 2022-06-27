@@ -46,7 +46,7 @@ class ProductController extends AbstractController
       $product = $managerRegistry->getRepository(product::class)->find($id);
       //TH1: xóa product không tồn tại => báo lỗi
       if ($product == null) {
-         $this->addFlash("Error", "product not found !");
+         $this->addFlash("Error", "Product not found !");
       }
      
       //TH3: product có tồn tại và không còn liên kết với todo => xóa khỏi DB và trả về thông báo

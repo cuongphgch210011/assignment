@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderDetailRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Product;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OrderDetailRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: OrderDetailRepository::class)]
 class OrderDetail
@@ -15,60 +16,18 @@ class OrderDetail
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    // #[ORM\OneToOne(targetEntity: Order::class, cascade: ['persist', 'remove'])]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private $orderid;
-
-    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy:"orderid", cascade:['persist','remove'])]
-    private $product;
-
     #[ORM\Column(type: 'integer')]
     private $quantity;
 
-    public function __construct()
-    {
-        $this->product = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'orderDetails')]
+    private $product;
+
+    #[ORM\OneToOne(mappedBy: 'orderdetail', targetEntity: Order::class, cascade: ['persist', 'remove'])]
+    private $orderid;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    // public function getOrderid(): ?Order
-    // {
-    //     return $this->orderid;
-    // }
-
-    // public function setOrderid(Order $orderid): self
-    // {
-    //     $this->orderid = $orderid;
-
-    //     return $this;
-    // }
-
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProduct(): Collection
-    {
-        return $this->product;
-    }
-
-    public function addProduct(Product $product): self
-    {
-        if (!$this->product->contains($product)) {
-            $this->product[] = $product;
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): self
-    {
-        $this->product->removeElement($product);
-
-        return $this;
     }
 
     public function getQuantity(): ?int
@@ -79,6 +38,40 @@ class OrderDetail
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    public function getOrderid(): ?Order
+    {
+        return $this->orderid;
+    }
+
+    public function setOrderid(?Order $orderid): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($orderid === null && $this->orderid !== null) {
+            $this->orderid->setOrderdetail(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($orderid !== null && $orderid->getOrderdetail() !== $this) {
+            $orderid->setOrderdetail($this);
+        }
+
+        $this->orderid = $orderid;
 
         return $this;
     }

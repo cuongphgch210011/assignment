@@ -1,8 +1,44 @@
-
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container-fluid text-center">
-<h1 class="text text-bg-success">Shopping cart</h1>
-</div>
+	<div class="container col-md-6 text-center mt-3">
+		<h1 class="text text-success">Shopping cart</h1>
+		{% if orderdetails == null %}
+			<h4 class="text text-bg-danger mt-4">Course not found !</h4>
+		{% else %}
+			<table class="table table-primary mt-3">
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>Quantity</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for orderdetail in orderdetails %}
+						<tr>
+							<td>
+								<a href="{{ path('product_detail', {'id': orderdetail.product.id })}}">
+									{{ orderdetail.product.name }}
+								</a>
+							</td>
+							<td>
+                            {{orderdetail.quantity}}
+                            </td>
+
+							<td>
+								<a class="text-decoration-none" href="{{ path('cart_edit', {'id': orderdetail.id })}}">
+									EDIT
+								</a>
+								<a class="text-decoration-none" href="{{ path('cart_delete', {'id': orderdetail.id })}}" onclick="return confirm('Are you sure to delete this cart ?');">
+									DELETE
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}
+	</div>
 {% endblock %}
+

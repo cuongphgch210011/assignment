@@ -39,19 +39,15 @@ class OrderDetailRepository extends ServiceEntityRepository
         }
     }
 
+
+
 //    /**
 //     * @return OrderDetail[] Returns an array of OrderDetail objects
 //     */
-//    public function findByExampleField($value): array
+//    public function addCart($productid)
 //    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
+//        $conn = $this->getEntityManager()->getConnection();
+//        $sql = 'insert into OrderDetail'
 //    }
 
 //    public function findOneBySomeField($value): ?OrderDetail

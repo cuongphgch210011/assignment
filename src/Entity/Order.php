@@ -20,13 +20,12 @@ class Order
     #[ORM\Column(type: 'string', length: 255)]
     private $shipcity;
 
-    #[ORM\OneToOne(targetEntity: Order::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private $orderdetailid;
-
     #[ORM\ManyToOne(targetEntity: Customer::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $customer;
+
+    #[ORM\OneToOne(inversedBy: 'orderid', targetEntity: OrderDetail::class, cascade: ['persist', 'remove'])]
+    private $orderdetail;
 
     public function getId(): ?int
     {
@@ -69,15 +68,16 @@ class Order
         return $this;
     }
 
-    public function getOrderDetailid(): ?OrderDetail
+    public function getOrderdetail(): ?OrderDetail
     {
-        return $this->orderdetailid;
+        return $this->orderdetail;
     }
 
-    public function setOrderDetailid(OrderDetail $orderdetailid): self
+    public function setOrderdetail(?OrderDetail $orderdetail): self
     {
-        $this->orderdetailid = $orderdetailid;
+        $this->orderdetail = $orderdetail;
 
         return $this;
     }
+
 }
