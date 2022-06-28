@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -38,6 +40,32 @@ class ProductRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    /**
+     * @return Product[]
+     */
+    public function sortByNameAscending()
+    {
+        return $this->createQueryBuilder('product')
+            ->orderBy('product.name', "ASC")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Product[]
+     */
+    public function sortByNameDescending()
+    {
+        return $this->createQueryBuilder('product')
+            ->orderBy('product.name', "DESC")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    
+
 
    /**
     * @return Product[] Returns an array of Product objects
@@ -66,3 +94,4 @@ class ProductRepository extends ServiceEntityRepository
        ;
    }
 }
+

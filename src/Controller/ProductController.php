@@ -60,6 +60,8 @@ class ProductController extends AbstractController
       }
       return $this->redirectToRoute("product_index");
    }
+   #[Route('/detail/{id}', name: 'view_product_by_id')]
+  
 
    #[Route("/add", name: "product_add")]
    public function addproduct(Request $request, ManagerRegistry $managerReigistry) {
@@ -145,4 +147,34 @@ class ProductController extends AbstractController
          'title' => $title
       ]);
    }
+   #[Route('/sortbyname/asc', name: 'sort_product_name_ascending')]
+    public function ProductSortAscending(ProductRepository $productRepository) {
+        $products = $productRepository->sortByNameAscending();
+        return $this->render(
+            "product/index.html.twig",
+            [
+                'products' => $products
+            ]);
+    }
+
+    #[Route('/sortbyname/desc', name: 'sort_product_name_descending')]
+    public function ProductSortDescending(ProductRepository $productRepository) {
+        $products = $productRepository->sortByNameDescending();
+        return $this->render(
+            "product/index.html.twig",
+            [
+                'products' => $products
+            ]);
+    }
+
+    #[Route('/searchbyname', name: 'search_product_name')]
+    public function ProductSearchByName (ProductRepository $productRepository, Request $request) {
+        $name = $request->get('keyword');
+        $products = $productRepository->searchByName($name);
+        return $this->render(
+            "product/index.html.twig",
+            [
+                'products' => $products
+            ]);
+    }
 }

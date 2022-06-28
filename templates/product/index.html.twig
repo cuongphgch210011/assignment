@@ -12,15 +12,34 @@
 {% for message in app.session.flashBag.get("Success") %}
         <p class="alert alert-warning  col-md-3 ">{{ message }} </p>
 {% endfor %} 
-<table class="table">
-    <thead>
+
+
+                        <a class="btn btn-success" href="{{ path('product_add') }}">Product Add</a>
+                        <br><br>
+                        <form class="form-group" action="{{ path('search_product_name') }}" method="post">
+        <input class="form-control" type="search" name="keyword" required
+        placeholder="Search by product name">
+    </form>
+    <div class="form-group mt-3 col-md-6">
+    <select onchange="window.location.href=this.value" class="form-control">
+        <option>Sort by</option>
+        <option value="{{ path('sort_product_name_ascending')}}">Name Ascending</option>
+        <option value="{{ path('sort_product_name_descending')}}">Name Descending</option>
+    </select>
+    </div>
+    {% if products == null %}
+        <h4 class="text text-bg-danger mt-4">product not found !</h4>
+    {% else %}
+
+<table class="table table-primary mt-3">
+        <thead>
         <tr>
             <th>Product Id</th>
             <th>Product Name</th>
             <th>Product Color</th>
             <th>Product Price</th>
             <th>Product Image</th>
-            <th> Category</th>
+           
             <th>Actions</th>
         </tr>
     </thead>
@@ -37,9 +56,9 @@
             <td>{{product.price}}</td>
             <td>
             <img src="{{asset(product.image)}}" alt="{{product.name}}"
-    width="500" height="400">
+    width="250" height="200">
     </td>
-     <td>{{product.name}}</td>
+     
             <td>
                 <a class="btn btn-warning" href="{{ path('product_edit', {'id' : product.id })}}">
                     EDIT
@@ -54,5 +73,6 @@
     {% endfor %}    
     </tbody>
 </table>
+ {% endif %}
 </div>
 {% endblock %}
