@@ -34,10 +34,10 @@
 
 							<td>{{orderdetail.product.price}}</td>
 							<td>
-								<a class="text-decoration-none" href="{{ path('cart_edit', {'id': orderdetail.id })}}">
+								<a class="text-decoration-none" href="{{ path('cart_edit', {id: orderdetail.id })}}">
 									EDIT
 								</a>
-								<a class="text-decoration-none" href="{{ path('cart_delete', {'id': orderdetail.id })}}" onclick="return confirm('Are you sure to delete this cart ?');">
+								<a class="text-decoration-none" href="{{ path('cart_delete', {id: orderdetail.id })}}" onclick="return confirm('Are you sure to delete this cart ?');">
 									DELETE
 								</a>
 							</td>

@@ -1,15 +1,15 @@
-{% form_theme orderdetailForm 'bootstrap_5_layout.html.twig' %}
+{% form_theme contactForm 'bootstrap_5_layout.html.twig' %}
 {% extends 'base.html.twig' %}
 
 {% block title %} Shopping cart {% endblock %}
 
 {% block body %}
-{% if is_granted('ROLE_USER') %}
+{% if is_granted('ROLE_ADMIN') %}
 <div class = "container-fluid row">
 
     <div class = "col-lg-10">
         <h1 class = "text text-primary"> Shopping cart </h1>
-        {{form(orderdetailForm)}}
+        {{form(contactForm)}}
     </div>
 </div>
 {% endif %}

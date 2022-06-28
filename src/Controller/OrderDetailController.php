@@ -24,7 +24,7 @@ class OrderDetailController extends AbstractController
    {
       $orderdetails = $managerRegistry->getRepository(OrderDetail::class)->findAll();
       if ($orderdetails == null) {
-         $this->addFlash("Error", "There is no product record yet");
+         $this->addFlash("Error", "Product is already in shopping cart");
       }
       return $this->render(
          "cart/index.html.twig",
@@ -54,8 +54,8 @@ class OrderDetailController extends AbstractController
    {
       $product = $managerRegistry ->getRepository(Product::class)->findOneBy(['id'=>$id]);
       $orderdetail = new OrderDetail();
-      $productod=$oderdetailRepository->setOrderDetail($id);
-      if($productod==null){
+      $productid=$oderdetailRepository->setOrderDetail($id);
+      if($productid==null){
       $orderdetail->setProduct($product);
       $orderdetail->setQuantity(1);
       $manager = $managerRegistry->getManager();
