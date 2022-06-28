@@ -22,9 +22,6 @@ class OrderDetail
     #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'orderDetails')]
     private $product;
 
-    #[ORM\OneToOne(mappedBy: 'orderdetail', targetEntity: Order::class, cascade: ['persist', 'remove'])]
-    private $orderid;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -50,28 +47,6 @@ class OrderDetail
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
-
-        return $this;
-    }
-
-    public function getOrderid(): ?Order
-    {
-        return $this->orderid;
-    }
-
-    public function setOrderid(?Order $orderid): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($orderid === null && $this->orderid !== null) {
-            $this->orderid->setOrderdetail(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($orderid !== null && $orderid->getOrderdetail() !== $this) {
-            $orderid->setOrderdetail($this);
-        }
-
-        $this->orderid = $orderid;
 
         return $this;
     }

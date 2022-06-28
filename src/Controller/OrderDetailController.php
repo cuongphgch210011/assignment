@@ -34,18 +34,6 @@ class OrderDetailController extends AbstractController
       );
    }
 
-   #[Route('/detail/{id}', name: 'cart_detail')]
-   public function CourbseDetail(OrderDetailRepository $orderDetailRepository, $id)
-   {
-      $orderdetail = $orderDetailRepository->find($id);
-      return $this->render(
-         "cart/detail.html.twig",
-         [
-            'orderdetail' => $orderdetail
-         ]
-      );
-   }
-
    #[Route("/delete/{id}", name: "cart_delete")]
    public function cartDelete($id, ManagerRegistry $managerRegistry)
    {
@@ -62,14 +50,14 @@ class OrderDetailController extends AbstractController
    }
 
    #[Route("/add{id}", name: "cart_add")]
-   public function addcart(Request $request, ManagerRegistry $managerRegistry,$id,OrderDetailRepository $oderdetailRepository)
+   public function addcart(ManagerRegistry $managerRegistry,$id,OrderDetailRepository $oderdetailRepository)
    {
       $product = $managerRegistry ->getRepository(Product::class)->findOneBy(['id'=>$id]);
       $orderdetail = new OrderDetail();
       $productod=$oderdetailRepository->setOrderDetail($id);
       if($productod==null){
       $orderdetail->setProduct($product);
-      $orderdetail->setQuantity(1+1);
+      $orderdetail->setQuantity(1);
       $manager = $managerRegistry->getManager();
       $manager->persist($orderdetail);
       $manager->flush();

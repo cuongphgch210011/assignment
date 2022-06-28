@@ -10,7 +10,7 @@ class CategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i=1; $i<=15; $i++) {
+        for ($i=1; $i<=5; $i++) {
             $category = new Category;
             $category->setName("Class $i");
             $category->setDescription("");
