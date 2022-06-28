@@ -57,14 +57,14 @@ class Order
         return $this;
     }
 
-    public function getCustomer(): ?Customer
+    public function getUser(): ?User
     {
-        return $this->customer;
+        return $this->User;
     }
 
-    public function setCustomer(?Customer $customer): self
+    public function setUser(?User $User): self
     {
-        $this->customer = $customer;
+        $this->User = $User;
 
         return $this;
     }

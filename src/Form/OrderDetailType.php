@@ -16,16 +16,7 @@ class OrderDetailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add(
-            'product',
-            EntityType::class,
-            [
-                'label' => 'Product name',
-                'required' => true,
-                'class' => Product::class,
-                'choice_label' => 'name',
-            ]
-        )
+        
         ->add(
             'quantity',
             IntegerType::class,
@@ -33,7 +24,10 @@ class OrderDetailType extends AbstractType
                 'label' => "Quantity",
                 'required' => true,
             ])
-        ->add('Save', SubmitType::class);
+        ->add('Save', SubmitType::class,
+        [
+            'label' => 'Add to cart',
+        ]);
         ;
     }
 

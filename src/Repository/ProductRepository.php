@@ -48,7 +48,6 @@ class ProductRepository extends ServiceEntityRepository
            ->andWhere('product.category = :id')
            ->setParameter('id', $id)
            ->orderBy('product.id', 'ASC')
-           ->setMaxResults(10)
            ->getQuery()
            ->getResult()
        ;
@@ -60,7 +59,6 @@ class ProductRepository extends ServiceEntityRepository
            ->andWhere('product.name LIKE :name')
            ->setParameter('name','%'. $name. '%')
            ->orderBy('product.id', 'DESC')
-            ->setMaxResults(5)
             ->getQuery()
             ->getResult()
        ;

@@ -62,23 +62,27 @@ class OrderDetailController extends AbstractController
    }
 
    #[Route("/add{id}", name: "cart_add")]
-   public function addcart(Request $request, ManagerRegistry $managerRegistry,$id)
+   public function addcart(Request $request, ManagerRegistry $managerRegistry,$id,OrderDetailRepository $oderdetailRepository)
    {
       $product = $managerRegistry ->getRepository(Product::class)->findOneBy(['id'=>$id]);
       $orderdetail = new OrderDetail();
-      $orderdetails = $managerRegistry->getRepository(OrderDetail::class)->find($id);
+      $productod=$oderdetailRepository->setOrderDetail($id);
+      if($productod==null){
       $orderdetail->setProduct($product);
-      $orderdetail->setQuantity(1);
-      if($product != null){
-         $manager = $managerRegistry->getManager();
-         $manager->flush();
-         $this->addFlash("Already exists","Add product to cart fail !");
-      }
+      $orderdetail->setQuantity(1+1);
       $manager = $managerRegistry->getManager();
       $manager->persist($orderdetail);
       $manager->flush();
       $this->addFlash("Success","Add product to cart succeed !");
+      
+      }else{
+         
+         $this->addFlash("Error", "There is no product record yet");
+        
+      }
+      
       return $this->redirectToRoute("cart_index");
+      
    }
 
    #[Route("/edit/{id}", name: "cart_edit")]

@@ -24,35 +24,38 @@
                    {% if is_granted('ROLE_ADMIN') %}
                   
                     <li class="nav-item">
-                        <h2><a class="nav-link" href="{{path('product_index')}}">Product</a></h2>
+                        <h3><a class="nav-link" href="{{path('product_index')}}">Product</a></h3>
                     </li>
                     <li class="nav-item">
-                        <h2><a class="nav-link" href="{{path('category_index')}}">Category</a></h2>
+                        <h3><a class="nav-link" href="{{path('category_index')}}">Category</a></h3>
                     </li>
                 
                      {% endif %}
                       {% if app.user  %}
                     <li class="nav-item ">
                    
-                        <h2><a class="nav-link" href="{{ path('app_logout') }}">Logout 
+                        <h3><a class="nav-link" href="{{ path('app_logout') }}">Logout 
                         <i>({{ app.user.username }})</i>
-                        </a></h2>
+                        </a></h3>
                         </li>
                           <li class="nav-item ">
-                        <h2><a class="nav-link" href="{{ path('user_edit', {id: app.user.id} ) }}">Profile 
+                        <h3><a class="nav-link" href="{{ path('user_edit', {id: app.user.id} ) }}">Profile 
                        
-                        </a></h2>
+                        </a></h3>
                         </li>
                         {% else %}
                           <li class="nav-item ">
-                            <h2><a class="nav-link" href="{{ path('app_login') }}">Login 
+                            <h3><a class="nav-link" href="{{ path('app_login') }}">Login 
                        
-                        </a></h2>
+                        </a></h3>
                         </li>
                         {% endif %}
                     </li>
                 </ul>
-                <a class="nav-link" href="{{ path('home') }}" ><img  src="{{asset('image/cart.png')}}" width="80" height="auto" id="cart"></a>
+               
+                
+                <a class="nav-link" href="{{ path('cart_index') }}" ><img  src="{{asset('image/cart.png')}}" width="80" height="auto" id="cart"></a>
+               
             </nav>
           
         {% endblock %}

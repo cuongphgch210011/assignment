@@ -23,10 +23,10 @@ class HomeController extends AbstractController
     
     #[Route('/category/{id}', name: 'categorysort')]
     public function Categoryindex(Request $request,ProductRepository $productRepository, CategoryRepository $categoryRepossitory,$id) 
-    {     $category = $productRepository->showByCategory($id);
+    {     $products = $productRepository->showByCategory($id);
         return $this->render('home/index.html.twig', [
           
-            'products' => $category,
+            'products' => $products,
             'categorys'=> $categoryRepossitory->findAll(),
         ]);
     }
