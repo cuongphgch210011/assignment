@@ -24,8 +24,8 @@
     <div class="row">
     <br>
          {% for product in products %}
-            <div class="col-md-4 " id="product">
-                <div class="card mb-4" height="450">
+            <div class="col-md-4 " >
+                <div class="card mb-4" height="450" id="product">
                     <img src="{{asset(product.image)}}" alt="{{ product.name }}" class="card-img-top" width="200" height="334">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>

@@ -34,7 +34,13 @@ class OrderDetail
     {
         return $this->quantity;
     }
+    
+    public function upQuantity(): self
+    {
+        $this->quantity += 1;
 
+        return $this;
+    }
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
@@ -43,6 +49,11 @@ class OrderDetail
     }
 
     public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function getProduct2(?Product $product): ?Product
     {
         return $this->product;
     }
