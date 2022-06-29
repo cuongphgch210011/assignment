@@ -40,29 +40,29 @@ class ProductRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    /**
-     * @return Product[]
-     */
-    public function sortByNameAscending()
-    {
-        return $this->createQueryBuilder('product')
-            ->orderBy('product.name', "ASC")
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+    // /**
+    //  * @return Product[]
+    //  */
+    // public function sortByNameAscending()
+    // {
+    //     return $this->createQueryBuilder('product')
+    //         ->orderBy('product.name', "ASC")
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
 
-    /**
-     * @return Product[]
-     */
-    public function sortByNameDescending()
-    {
-        return $this->createQueryBuilder('product')
-            ->orderBy('product.name', "DESC")
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+    // /**
+    //  * @return Product[]
+    //  */
+    // public function sortByNameDescending()
+    // {
+    //     return $this->createQueryBuilder('product')
+    //         ->orderBy('product.name', "DESC")
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
 
     
 

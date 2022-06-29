@@ -3,10 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Product;
-
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -31,8 +32,8 @@ class ProductType extends AbstractType
             [
                 'label' => "Product Price",
                 'attr' => [
-                    'min' => 20,
-                    'max' => 50
+                    'min' => 1,
+                    'max' => 50000
                 ]
             ])
             ->add('color', TextType::class,
@@ -42,7 +43,19 @@ class ProductType extends AbstractType
             ->add('description', TextType::class,
             [
                 'label' => 'Product Description'
+                
             ])
+            ->add('category', EntityType::class,
+            [
+                'label' => 'Category name',
+                'required' => true,
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => false
+            ]
+        )
+            
             ->add('image', FileType::class,
             [
                 'label' => 'Product image',
@@ -62,4 +75,5 @@ class ProductType extends AbstractType
             'data_class' => Product::class,
         ]);
     }
+    
 }
