@@ -9,28 +9,35 @@
 			<table class="table table-primary mt-3">
 				<thead>
 					<tr>
+						<th>Image</th>
 						<th>Product</th>
 						<th>Quantity</th>
+						<th>Unit price</th>
 						<th>Actions</th>
+
 					</tr>
 				</thead>
 				<tbody>
 					{% for orderdetail in orderdetails %}
 						<tr>
 							<td>
-								<a href="{{ path('product_detail', {'id': orderdetail.product.id })}}">
+								<img src="{{asset(orderdetail.product.image)}}" alt="{{ orderdetail.product.name }}" class="img-fluid" width="150" height="150">
+							</td>
+							<td>
+								<a href="{{ path('product_detail', {id: orderdetail.product.id })}}">
 									{{ orderdetail.product.name }}
 								</a>
 							</td>
 							<td>
-                            {{orderdetail.quantity}}
-                            </td>
+								{{orderdetail.quantity}}
+							</td>
 
+							<td>{{orderdetail.product.price}}</td>
 							<td>
-								<a class="text-decoration-none" href="{{ path('cart_edit', {'id': orderdetail.id })}}">
+								<a class="text-decoration-none" href="{{ path('cart_edit', {id: orderdetail.id })}}">
 									EDIT
 								</a>
-								<a class="text-decoration-none" href="{{ path('cart_delete', {'id': orderdetail.id })}}" onclick="return confirm('Are you sure to delete this cart ?');">
+								<a class="text-decoration-none" href="{{ path('cart_delete', {id: orderdetail.id })}}" onclick="return confirm('Are you sure to delete this cart ?');">
 									DELETE
 								</a>
 							</td>
@@ -38,6 +45,9 @@
 					{% endfor %}
 				</tbody>
 			</table>
+			<form class="mt-4 p-4 bg-light" method="post">
+				<a href="#" class="btn btn-warning">Check out</a>
+			</form>
 		{% endif %}
 	</div>
 {% endblock %}

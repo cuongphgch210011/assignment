@@ -5,6 +5,7 @@
 {% block body %}
 <div class="container col-md-6 text-center mt-3">
 <h1 class="text text-primary"> Category List </h1>
+<a name="" id="" class="btn btn-primary" href="{{ path('category_add')}}" role="button">Add</a>
 {% for message in app.session.flashBag.get("Error") %}
         <p class="alert alert-danger  col-md-3 text-center">{{ message }} </p>
 {% endfor %} 

@@ -59,4 +59,26 @@ class OrderDetailRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function setOrderDetail($id)
+{
+    return $this->createQueryBuilder('orderdetail')
+        ->andWhere('orderdetail.product = :id')
+        ->setParameter('id', $id)
+        ->orderBy('orderdetail.id', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getOneOrNullResult()
+    ;
+}
+public function getQuantity($id)
+{
+    return $this->createQueryBuilder('orderdetail')
+        ->andWhere('orderdetail.product = :id')
+        ->setParameter('id', $id)
+        ->orderBy('orderdetail.id', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getOneOrNullResult()
+    ;
+}
 }

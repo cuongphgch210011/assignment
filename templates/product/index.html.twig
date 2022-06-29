@@ -4,8 +4,9 @@
 
 
 {% block body %}
-<div class="container col-md-8 text-center mt-3">
+<div class="container col-md-9 text-center mt-3">
 <h1 class="text text-primary"> Product List </h1>
+<a name="" id="" class="btn btn-primary" href="{{ path('product_add')}}" role="button">Add</a>
 {% for message in app.session.flashBag.get("Error") %}
         <p class="alert alert-danger  col-md-3 ">{{ message }} </p>
 {% endfor %} 
@@ -42,9 +43,9 @@
             <td>{{product.price}}</td>
             <td>
             <img src="{{asset(product.image)}}" alt="{{product.name}}"
-    width="250" height="200">
+    width="200" height="200">
     </td>
-     
+     <td>{{product.category.name}}</td>
             <td>
                 <a class="btn btn-warning" href="{{ path('product_edit', {'id' : product.id })}}">
                     EDIT

@@ -24,8 +24,6 @@ class OrderDetailType extends AbstractType
                 'required' => true,
                 'class' => Product::class,
                 'choice_label' => 'name',
-                'multiple' => false,
-                'expanded' => false
             ]
         )
         ->add(
@@ -35,7 +33,10 @@ class OrderDetailType extends AbstractType
                 'label' => "Quantity",
                 'required' => true,
             ])
-        ->add('Save', SubmitType::class);
+        ->add('Save', SubmitType::class,
+        [
+            'label' => 'Save',
+        ]);
         ;
     }
 

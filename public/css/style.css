@@ -15,9 +15,10 @@ background-color: #f4f4f4;
  background-color: rgb(255, 255, 255);
   border-radius: 8px;
   padding:0;
-  height:auto;
+  width: 167px;
+  height: 216px;
   box-shadow: rgb(60 64 67 / 10%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
-  border-radius: 10px;
+  border-radius: 8px;
   
 }
 #category ul{
@@ -27,6 +28,7 @@ background-color: #f4f4f4;
   line-height: 20px;
   background-color: white;
   border-radius: 10px;
+  font-size: 20px;
   
   
   
@@ -56,4 +58,9 @@ background-color: white;
   position: absolute;
   left:1350px;
   top: 12px;
+}
+
+#product{
+  box-shadow: rgb(60 64 67 / 10%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+  padding: 0;
 }

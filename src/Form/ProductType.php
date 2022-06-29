@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Category;
 
 class ProductType extends AbstractType
 {
@@ -64,6 +66,15 @@ class ProductType extends AbstractType
                             //is_null : boolean
                             //if image is null => required = true
                             //else if image is not null => required = false
+            ])
+            ->add('category', EntityType::class,
+                ['label'=>'Category',
+                'required'=>true,
+                'class'=>Category::class,
+                'choice_label'=>'name',
+                'multiple' => false,
+                'expanded' => false
+
             ])
             ->add('Save', SubmitType::class)
         ;
