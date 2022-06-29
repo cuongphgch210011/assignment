@@ -1,7 +1,9 @@
 {% form_theme orderdetailForm 'bootstrap_5_layout.html.twig' %}
 {% extends 'base.html.twig' %}
 
-{% block title %} Shopping cart {% endblock %}
+{% block title %}
+	Shopping cart
+{% endblock %}
 
 {# {% block dropdown %}
     <div class="navbar-nav">
@@ -15,17 +17,14 @@
 {% endblock %} #}
 
 {% block body %}
-<div class = "container-fluid row">
-    {# <div class = "col-lg-2">
-        <ul class = "navbar-nav">
-            <a href="{{path('category_index')}}">Category</a>
-            <a href="{{path('product_index')}}">Product</a>
-            <a href="{{path('app_register')}}">Create Account</a>
-        </ul>
-    </div> #}
-    <div class = "col-lg-10">
-        <h1 class = "text text-primary"> Shopping cart </h1>
-        {{form(orderdetailForm)}}
-    </div>
-</div>
-{% endblock %}
+	<div class="container col-md-6 text-center mt-3">
+		<div class="col-lg-10">
+			<h1 class="text text-primary">
+				Shopping cart
+			</h1>
+			{{form_start (orderdetailForm) }}
+            {{form_end (orderdetailForm) }}
+			</div>
+		</div>
+	{% endblock %}
+

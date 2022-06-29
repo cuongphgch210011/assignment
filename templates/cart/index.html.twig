@@ -34,10 +34,10 @@
 
 							<td>{{orderdetail.product.price}}</td>
 							<td>
-								<a class="text-decoration-none" href="{{ path('cart_edit', {'id': orderdetail.id })}}">
+								<a class="text-decoration-none" href="{{ path('cart_edit', {id: orderdetail.id })}}">
 									EDIT
 								</a>
-								<a class="text-decoration-none" href="{{ path('cart_delete', {'id': orderdetail.id })}}" onclick="return confirm('Are you sure to delete this cart ?');">
+								<a class="text-decoration-none" href="{{ path('cart_delete', {id: orderdetail.id })}}" onclick="return confirm('Are you sure to delete this cart ?');">
 									DELETE
 								</a>
 							</td>
@@ -45,6 +45,9 @@
 					{% endfor %}
 				</tbody>
 			</table>
+			<form class="mt-4 p-4 bg-light" method="post">
+				<a href="#" class="btn btn-warning">Check out</a>
+			</form>
 		{% endif %}
 	</div>
 {% endblock %}

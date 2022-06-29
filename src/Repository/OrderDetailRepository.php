@@ -67,7 +67,7 @@ public function setOrderDetail($id)
         ->orderBy('orderdetail.id', 'ASC')
         ->setMaxResults(10)
         ->getQuery()
-        ->getResult()
+        ->getOneOrNullResult()
     ;
 }
 public function getQuantity($id)
@@ -78,7 +78,7 @@ public function getQuantity($id)
         ->orderBy('orderdetail.id', 'ASC')
         ->setMaxResults(10)
         ->getQuery()
-        ->getResult()
+        ->getOneOrNullResult()
     ;
 }
 }
